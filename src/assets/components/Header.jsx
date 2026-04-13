@@ -7,7 +7,7 @@ function Header({ setPage, toggleMenu }) {
             <img 
               src={logo}
               alt="CodexLing Logo"
-              style={{ width: "60px" }} />
+              style={{ width: "80px" }} />
         </div>
         <div 
           nst className="logo-text"

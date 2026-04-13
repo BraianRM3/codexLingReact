@@ -1,40 +1,33 @@
 import CourseCard from "../components/CourseCard";
+import { courses } from "../components/Courses";
+import { useState } from "react";
 
-function Home({ setPage }) {
+function Home({ setPage, search }) {
+  // Filtrar cursos según lo que escribe el usuario
+  const filteredCourses = courses.filter((course) =>
+  course.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="courses-container">
 
-      <CourseCard
-        title="HTML"
-        icon="fab fa-html5"
-        description="PROGRAMACIÓN ENFOCADA EN HIPERTEXTO"
-        onClick={() => setPage("html")}
-        type="html"
-      />
-
-      <CourseCard
-        title="PYTHON"
-        icon="fab fa-python"
-        description="IA Y ANALISIS DE DATOS"
-        onClick={() => setPage("python")}
-        type="python"
-      />
-
-      <CourseCard
-        title="JAVA"
-        icon="fab fa-java"
-        description="APLICACIONES EMPRESARIALES"
-        onClick={() => setPage("java")}
-        type="java"
-      />
-
-      <CourseCard
-        title="PHP"
-        icon="fab fa-php"
-        description="BACKEND Y BASES DE DATOS"
-        onClick={() => setPage("php")}
-        type="php"
-      />
+        {/* 🔁 Renderizado con map */}
+        {filteredCourses.length > 0 ? (
+        filteredCourses.map((course) => (
+          <CourseCard
+            key={course.id}
+            title={course.title}
+            icon={course.icon}
+            description={course.description}
+            onClick={() => setPage(course.page)}
+            type={course.type}
+          />
+        ))
+      ) : (
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          No se encontraron cursos 😢
+        </p>
+      )}
 
     </div>
   );
